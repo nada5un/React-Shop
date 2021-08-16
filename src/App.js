@@ -1,5 +1,5 @@
 import './App.css';
-import {Navbar,Container,Nav,NavDropdown,Button} from 'react-bootstrap';
+import { Navbar,Container,Nav,NavDropdown,Button } from 'react-bootstrap';
 import { useState } from 'react';
 import Data from './data.js';
 import Detail from './Detail.js'
@@ -54,13 +54,13 @@ function App() {
         </div>
       
         </Route>
-        <Route path='/detail'>
-          <Detail></Detail>
+        <Route path='/detail/:idx'>
+          <Detail shoesData={shoesData}></Detail>
         </Route>
-        <Route path="/:id">
+        <Route path="/:idx">
           <div>아무거나 적었을때 보여주셈</div>
         </Route>
-        
+
       </Switch>
     </div>
   );

@@ -1,0 +1,50 @@
+//프로그래밍 언어스럽게 개발 가능 
+
+$메인칼라 : #ff0000;
+
+.red{
+    color: $메인칼라;
+}
+
+//mixin
+@mixin alertMixin() {
+    background: #eeeeee;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    margin:auto;
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.my-alert{
+    @include alertMixin()
+}
+
+//extend
+.my-alert-yellow{
+    @extend .my-alert;
+    background: #ffe591;
+}
+
+
+// div.container h4{
+//     color:blue;
+// }
+
+// div.container p{
+//     color:green;
+// }
+
+//nesting 
+// div.container {
+//     h4{
+//         color: blue;
+//     }
+//     p{
+//         color:green;
+//     }
+// }
