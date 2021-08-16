@@ -1,20 +1,24 @@
 import './App.css';
 import {Navbar,Container,Nav,NavDropdown,Button} from 'react-bootstrap';
 import { useState } from 'react';
-import data from './data.js';
+import Data from './data.js';
+import Detail from './Detail.js'
+import { Link , Route, Switch} from 'react-router-dom'
+import { Modal } from 'bootstrap';
+
 
 function App() {
-  let [shoesData] = useState(data);
+  let [shoesData] = useState(Data);
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">신발샵</Navbar.Brand>
+          <Navbar.Brand><Link className="linkText" to="/">신발샵</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link><Link className="linkText" to="/">Home</Link></Nav.Link>
+              <Nav.Link><Link className="linkText" to="/detail">Detail</Link></Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -26,26 +30,38 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="background">
-        <h1>20% Season OFF</h1>
-        <p>
-          This site offer a biggest sale product in the Korea.
-          We hope you to enjoy here
-        </p>
-        <p>
-        <Button variant="primary">Learn more</Button>
-        </p>
-      </div>
-
-      <div className="container">
-        <div className="row">
-          {
-            shoesData.map((shoes)=>(
-              <Card shoesData={shoes} key={shoes.id}></Card>
-            ))
-          }
+      
+      <Switch>
+        <Route exact path='/'>
+          <div className="background">
+            <h1>20% Season OFF</h1>
+            <p>
+              This site offer a biggest sale product in the Korea.
+              We hope you to enjoy here
+            </p>
+            <p>
+            <Button variant="primary">Go Shopping</Button>
+            </p>
+          </div>
+          <div className="container">
+          <div className="row">
+            {
+              shoesData.map((shoes)=>(
+                <Card shoesData={shoes} key={shoes.id}></Card>
+              ))
+            }
+          </div>
         </div>
-      </div>
+      
+        </Route>
+        <Route path='/detail'>
+          <Detail></Detail>
+        </Route>
+        <Route path="/:id">
+          <div>아무거나 적었을때 보여주셈</div>
+        </Route>
+        
+      </Switch>
     </div>
   );
 }
@@ -61,7 +77,5 @@ function Card(props){
     </div>
   )
 }
-
-
 
 export default App;

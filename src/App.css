@@ -40,6 +40,11 @@
   color: white;
 }
 
+a.linkText{
+  color: inherit;
+  text-decoration: none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
