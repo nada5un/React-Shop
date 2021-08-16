@@ -39,27 +39,27 @@ function App() {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
-            <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" alt=""></img>
-            <h4>{shoesData[0].title}</h4>
-            <p>{shoesData[0].content}</p>
-            <p>{shoesData[0].price}원</p>
-          </div>
-          <div className="col-md-4">
-            <img src="https://codingapple1.github.io/shop/shoes2.jpg" width="100%" alt=""></img>
-            <h4>{shoesData[1].title}</h4>
-            <p>상품설명&가격</p>
-          </div>
-          <div className="col-md-4">
-            <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="100%" alt=""></img>
-            <h4>{shoesData[2].title}</h4>
-            <p>상품설명&가격</p>
-          </div>
+          {
+            shoesData.map((shoes)=>(
+              <Card shoesData={shoes} key={shoes.id}></Card>
+            ))
+          }
         </div>
       </div>
-
     </div>
   );
+}
+
+function Card(props){
+  const data = props.shoesData;
+  return (
+    <div className="col-md-4">
+      <img src={`https://codingapple1.github.io/shop/shoes${data.id+1}.jpg`} width="100%" alt=""></img>
+      <h4>{data.title}</h4>
+      <p>{data.content}</p>
+      <p>{data.price}원</p>
+    </div>
+  )
 }
 
 
