@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss'
@@ -15,8 +15,20 @@ let Title = styled.h4`
 
 function Detail(props){
   let history = useHistory();
+  let [alert,alertSet] = useState(true);
+  let [input,inputSet] = useState('');
   let {idx} = useParams();
+  
+  useEffect(()=>{
+    let 타이머 = setTimeout(()=>{ alertSet(false)},2000);
 
+    //컴포넌트 사라질때 실행 
+    return ()=>{clearTimeout(타이머)};
+    // return function f(){}
+    //alert 변경 될때만 실행 
+  },[]);
+
+  
   const data = props.shoesData;
 
   let 찾은상품 = data.find(function(d){
@@ -28,9 +40,11 @@ function Detail(props){
         <Box>
           <Title>Detail</Title>
         </Box>
-        <div className="my-alert">
-          <p>재고가 얼마 남지 않았습니다</p>
-        </div>
+
+        {
+          alert?<Alert></Alert>:null
+        }
+        
         <div className="row">
           <div className="col-md-6">
             <img src={`https://codingapple1.github.io/shop/shoes${찾은상품.id+1}.jpg`} alt="" width="100%" />
@@ -44,6 +58,15 @@ function Detail(props){
           </div>
         </div>
       </div> 
+      
+    )
+  }
+
+  function Alert(){
+    return (
+      <div className="my-alert">
+        <p>재고가 얼마 남지 않았습니다</p>
+      </div>
     )
   }
 
